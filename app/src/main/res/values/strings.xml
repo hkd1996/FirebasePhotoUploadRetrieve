@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PhotoServer</string>
+    <string name="auth_details">Confirm your identity by authenticating your fingerprint</string>
+</resources>
