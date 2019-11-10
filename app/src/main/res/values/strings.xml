@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">PhotoServer</string>
     <string name="auth_details">Confirm your identity by authenticating your fingerprint</string>
+    <string name="login">LOGIN</string>
+    <string name="email">EMAIL ID</string>
+    <string name="password">PASSWORD</string>
+    <string name="proceed">PROCEED</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="minimum_password">"Minimum length required"</string>
+    <string name="auth_failed">"Authentication failed"</string>
+    <string name="register">REGISTER</string>
 </resources>

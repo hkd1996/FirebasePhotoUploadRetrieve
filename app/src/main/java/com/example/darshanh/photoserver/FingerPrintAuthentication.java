@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.multidots.fingerprintauth.AuthErrorCodes;
