@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,7 @@ public class ViewUploadedImage extends AppCompatActivity {
   //  private RecyclerAdapter adapter;
     private List<Upload> uploads;
     private DatabaseReference mDatabaseRef;
+    private FirebaseAuth auth;
     GridViewAdapter adapter;
     private String android_id;
     TextView noItemsTv;
@@ -46,8 +48,9 @@ public class ViewUploadedImage extends AppCompatActivity {
         gridView=(GridView)findViewById(R.id.gridView);
         noItemsTv=(TextView)findViewById(R.id.textView);
         uploads = new ArrayList<>();
+        auth=FirebaseAuth.getInstance();
         android_id= Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+android_id);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+auth.getCurrentUser().getUid());
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

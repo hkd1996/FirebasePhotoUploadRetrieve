@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,7 @@ public class ViewIndividualPhoto extends AppCompatActivity {
     ImageView clickedIv;
     Button deleteImageBtn;
     StorageReference storageRef;
+    FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     String android_id;
 
@@ -40,6 +42,7 @@ public class ViewIndividualPhoto extends AppCompatActivity {
         final int position=photo.getInt("imagePosition");
         final List<Upload> uploads=(List<Upload>)photo.getSerializable("uploads");
         final Upload upload = uploads.get(position);
+        mAuth=FirebaseAuth.getInstance();
         Glide.with(getApplicationContext()).load(upload.getUrl()).into(clickedIv);
         deleteImageBtn=(Button)findViewById(R.id.deleteImage);
         deleteImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +53,7 @@ public class ViewIndividualPhoto extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         android_id= Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
-                        mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+android_id);
+                        mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+mAuth.getCurrentUser().getUid());
                         Query query=mDatabase.orderByChild("url").equalTo(upload.getUrl());
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

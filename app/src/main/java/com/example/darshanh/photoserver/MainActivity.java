@@ -135,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
             int n = 10000;
             n = generator.nextInt(n);
             filename = "Image-" + n + ".jpg";
-
-            final StorageReference sRef = storageRef.child(Constants.STORAGE_PATH_UPLOADS +android_id+"/"+ filename);
+           final StorageReference sRef = storageRef.child(Constants.STORAGE_PATH_UPLOADS +mAuth.getCurrentUser().getUid()+"/"+ filename);
 
             pd=new ProgressDialog(this);
             pd.setMax(100);
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                         Uri downloadUri = task.getResult();
                         url=downloadUri.toString();
                         Upload upload=new Upload(url);
-                        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+android_id);
+                        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS+"/"+mAuth.getCurrentUser().getUid());
                         String uploadId = mDatabase.push().getKey();
                         mDatabase.child(uploadId).setValue(upload);
                     } else {
